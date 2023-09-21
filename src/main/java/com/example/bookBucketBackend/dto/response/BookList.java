@@ -1,14 +1,14 @@
 package com.example.bookBucketBackend.dto.response;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Builder
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookList {
     private List<Book> books;
 
@@ -16,6 +16,8 @@ public class BookList {
     @Getter
     @Setter
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Book {
         private String bookId;
         private String bookName;
