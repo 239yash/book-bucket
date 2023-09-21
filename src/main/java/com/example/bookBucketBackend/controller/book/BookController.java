@@ -1,23 +1,23 @@
 package com.example.bookBucketBackend.controller.book;
 
 
+import com.example.bookBucketBackend.dto.response.BookList;
+import com.example.bookBucketBackend.service.books.BookService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/books")
 @Slf4j
 public class BookController {
+    private final BookService bookService;
 
     @GetMapping("/list")
-    public List<?> getBooksList() {
-        return new ArrayList<>();
+    public BookList getBooksList() {
+        return bookService.getBooksList();
     }
 }

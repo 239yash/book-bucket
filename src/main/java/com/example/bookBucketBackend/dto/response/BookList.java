@@ -9,7 +9,7 @@ import java.util.List;
 
 @Builder
 @Getter
-public class BookListingResponse {
+public class BookList {
     private List<Book> books;
 
     @Builder
