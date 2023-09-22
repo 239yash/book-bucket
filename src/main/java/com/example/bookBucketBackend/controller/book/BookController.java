@@ -6,6 +6,7 @@ import com.example.bookBucketBackend.service.books.BookService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class BookController {
     @GetMapping("/list")
     public BookList getBooksList() {
         return bookService.getBooksList();
+    }
+
+    @GetMapping("/{bookId}")
+    public BookList.Book getBook(@PathVariable String bookId) {
+        return bookService.getBook(bookId);
     }
 }

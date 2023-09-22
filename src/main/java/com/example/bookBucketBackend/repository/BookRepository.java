@@ -4,6 +4,8 @@ import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.entity.BookEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,5 +24,11 @@ public class BookRepository {
 
     public List<BookEntity> getAllBooks() {
         return mongoTemplate.findAll(BookEntity.class);
+    }
+
+    public BookEntity getBook(String bookId) {
+        Criteria criteria = Criteria.where("bookId").is(bookId);
+        Query query = new Query(criteria);
+        return mongoTemplate.findOne(query, BookEntity.class);
     }
 }

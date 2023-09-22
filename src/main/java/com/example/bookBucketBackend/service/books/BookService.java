@@ -27,4 +27,15 @@ public class BookService {
         }
         return BookList.builder().books(books).build();
     }
+
+    public BookList.Book getBook(String bookId) {
+        BookEntity book = bookRepository.getBook(bookId);
+        BookList.Book bookData = new BookList.Book();
+        bookData.setBookName(book.getBookName());
+        bookData.setBookId(book.getBookId());
+        bookData.setYear(book.getYear());
+        bookData.setBranch(book.getBranch());
+        bookData.setCountsAvailable(book.getCountsAvailable());
+        return bookData;
+    }
 }
