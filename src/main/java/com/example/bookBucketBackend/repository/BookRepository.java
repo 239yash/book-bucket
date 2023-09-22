@@ -1,9 +1,12 @@
 package com.example.bookBucketBackend.repository;
 
 import com.example.bookBucketBackend.dto.response.BookList;
+import com.example.bookBucketBackend.entity.BookEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -15,5 +18,9 @@ public class BookRepository {
         book.setBookName("xyz");
 
         mongoTemplate.save(book);
+    }
+
+    public List<BookEntity> getAllBooks() {
+        return mongoTemplate.findAll(BookEntity.class);
     }
 }
