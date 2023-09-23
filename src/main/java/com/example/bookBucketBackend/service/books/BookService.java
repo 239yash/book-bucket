@@ -38,4 +38,19 @@ public class BookService {
         bookData.setCountsAvailable(book.getCountsAvailable());
         return bookData;
     }
+
+    public boolean addBook(BookList.Book book) {
+        try {
+            BookEntity bookEntity = new BookEntity();
+            bookEntity.setBookName(book.getBookName());
+            bookEntity.setYear(book.getYear());
+            bookEntity.setBranch(book.getBranch());
+            bookEntity.setCountsAvailable(book.getCountsAvailable());
+            bookEntity.setSemester(book.getSemester());
+            bookRepository.addBook(bookEntity);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 }

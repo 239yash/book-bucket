@@ -5,10 +5,9 @@ import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.service.books.BookService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -25,5 +24,13 @@ public class BookController {
     @GetMapping("/{bookId}")
     public BookList.Book getBook(@PathVariable String bookId) {
         return bookService.getBook(bookId);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addBook(@RequestBody BookList.Book book) {
+        if (bookService.addBook(book)) {
+            return ResponseEntity.ok("Success");
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Fail");
     }
 }
