@@ -16,20 +16,37 @@ public class BookService {
     public BookList getBooksList() {
         List<BookEntity> data = bookRepository.getAllBooks();
         List<BookList.Book> books = new ArrayList<>();
-        BookList.Book bookData = new BookList.Book();
         for (BookEntity book : data) {
-            bookData.setBookName(book.getBookName());
-            bookData.setBookId(book.getBookId());
-            bookData.setYear(book.getYear());
-            bookData.setBranch(book.getBranch());
-            bookData.setCountsAvailable(book.getCountsAvailable());
-            books.add(bookData);
+            books.add(getBookModel(book));
         }
         return BookList.builder().books(books).build();
     }
 
     public BookList.Book getBook(String bookId) {
         BookEntity book = bookRepository.getBook(bookId);
+        return getBookModel(book);
+    }
+
+    public boolean addBook(BookList.Book book) {
+        try {
+            bookRepository.addBook(getBookEntity(book));
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    private BookEntity getBookEntity(BookList.Book book) {
+        BookEntity bookEntity = new BookEntity();
+        bookEntity.setBookName(book.getBookName());
+        bookEntity.setYear(book.getYear());
+        bookEntity.setBranch(book.getBranch());
+        bookEntity.setCountsAvailable(book.getCountsAvailable());
+        bookEntity.setSemester(book.getSemester());
+        return bookEntity;
+    }
+
+    private BookList.Book getBookModel(BookEntity book) {
         BookList.Book bookData = new BookList.Book();
         bookData.setBookName(book.getBookName());
         bookData.setBookId(book.getBookId());
@@ -37,20 +54,5 @@ public class BookService {
         bookData.setBranch(book.getBranch());
         bookData.setCountsAvailable(book.getCountsAvailable());
         return bookData;
-    }
-
-    public boolean addBook(BookList.Book book) {
-        try {
-            BookEntity bookEntity = new BookEntity();
-            bookEntity.setBookName(book.getBookName());
-            bookEntity.setYear(book.getYear());
-            bookEntity.setBranch(book.getBranch());
-            bookEntity.setCountsAvailable(book.getCountsAvailable());
-            bookEntity.setSemester(book.getSemester());
-            bookRepository.addBook(bookEntity);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
     }
 }
