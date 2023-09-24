@@ -1,0 +1,9 @@
+User
+1. Can Order - Buy books
+2. Can Sell - Add books
+3. View Books Available
+
+Admin
+1. Check Orders
+2. Mark Orders
+3. Add books manually
