@@ -7,3 +7,12 @@ Admin
 1. Check Orders
 2. Mark Orders
 3. Add books manually
+
+APIs
+1. List books
+2. Get single book
+3. Add book (Only by sell order flow or admin flow)
+4. CRUD for order draft (orderType - BUY/SELL)
+5. Orders listing (Admin only)
+6. API for changing state of the order (Admin only)
+7. API for editing order (Admin only)
