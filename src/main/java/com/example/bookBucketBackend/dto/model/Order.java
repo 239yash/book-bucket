@@ -12,9 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
+    private String id;
     private String userId;
     private boolean isSubmitted;
     private boolean isDeleted;
     private Constants.OrderType orderType;
     private List<BookList.Book> books;
+    private Constants.OrderStatus orderStatus;
 }
