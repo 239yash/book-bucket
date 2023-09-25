@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "book")
+@Document(collection = "books")
 @Getter
 @Setter
 public class BookEntity {
