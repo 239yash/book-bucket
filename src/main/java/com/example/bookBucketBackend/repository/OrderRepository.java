@@ -19,4 +19,8 @@ public class OrderRepository {
                 .and("isDeleted").is(false);
         return mongoTemplate.findOne(new Query(criteria), OrderEntity.class);
     }
+
+    public void addOrder(OrderEntity orderEntity) {
+        mongoTemplate.save(orderEntity);
+    }
 }

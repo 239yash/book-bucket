@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class OrderModel {
     private String id;
     private String userId;
     private boolean isSubmitted;
