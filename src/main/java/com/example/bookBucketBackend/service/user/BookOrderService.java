@@ -32,4 +32,19 @@ public class BookOrderService {
         orderEntity.setDeleted(false);
         return orderEntity;
     }
+
+    public boolean editOrder(OrderModel orderData) {
+        String userId = orderData.getUserId();
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+        if (orderEntity == null) {
+            return false;
+        }
+        updateOrderEntityAgainstRequestData(orderEntity, orderData);
+        orderRepository.updateOrder(orderEntity);
+        return true;
+    }
+
+    private void updateOrderEntityAgainstRequestData(OrderEntity orderEntity, OrderModel orderData) {
+        orderEntity.setBooks(orderData.getBooks().isEmpty() ? orderEntity.getBooks() : orderData.getBooks());
+    }
 }
