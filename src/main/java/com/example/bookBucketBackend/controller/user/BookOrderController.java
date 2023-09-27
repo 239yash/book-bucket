@@ -5,10 +5,7 @@ import com.example.bookBucketBackend.service.user.BookOrderService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -18,10 +15,18 @@ public class BookOrderController {
     private final BookOrderService bookOrderService;
 
     @PostMapping
-    public ResponseEntity<?> createOrder(@RequestBody OrderModel orderData) {
-        if (orderData.getUserId() == null) {
+    public ResponseEntity<?> createOrder(@RequestBody OrderModel orderModel) {
+        if (orderModel.getUserId() == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderService.createOrder(orderData));
+        return ResponseEntity.ok(bookOrderService.createOrder(orderModel));
+    }
+
+    @PutMapping
+    public ResponseEntity<?> editOrder(@RequestBody OrderModel orderModel) {
+        if (orderModel.getUserId() == null) {
+            return ResponseEntity.badRequest().body("Please pass valid userId");
+        }
+        return ResponseEntity.ok(bookOrderService.editOrder(orderModel));
     }
 }
