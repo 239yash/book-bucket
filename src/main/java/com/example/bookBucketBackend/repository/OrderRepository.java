@@ -23,4 +23,8 @@ public class OrderRepository {
     public void addOrder(OrderEntity orderEntity) {
         mongoTemplate.save(orderEntity);
     }
+
+    public void updateOrder(OrderEntity orderEntity) {
+        mongoTemplate.save(orderEntity);
+    }
 }
