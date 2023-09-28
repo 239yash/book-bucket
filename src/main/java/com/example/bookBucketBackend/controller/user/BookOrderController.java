@@ -15,7 +15,7 @@ public class BookOrderController {
     private final BookOrderService bookOrderService;
 
     @PostMapping
-    public ResponseEntity<?> createOrder(@RequestBody OrderModel orderModel) {
+    public ResponseEntity<?> createOrderDraft(@RequestBody OrderModel orderModel) {
         if (orderModel.getUserId() == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
@@ -23,10 +23,18 @@ public class BookOrderController {
     }
 
     @PutMapping
-    public ResponseEntity<?> editOrder(@RequestBody OrderModel orderModel) {
+    public ResponseEntity<?> editOrderDraft(@RequestBody OrderModel orderModel) {
         if (orderModel.getUserId() == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
         return ResponseEntity.ok(bookOrderService.editOrder(orderModel));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteOrderDraft(@RequestBody OrderModel orderModel) {
+        if (orderModel.getUserId() == null) {
+            return ResponseEntity.badRequest().body("Please pass valid userId");
+        }
+        return ResponseEntity.ok(bookOrderService.deleteOrder(orderModel));
     }
 }
