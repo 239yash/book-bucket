@@ -44,6 +44,17 @@ public class BookOrderService {
         return true;
     }
 
+    public boolean deleteOrder(OrderModel orderModel) {
+        String userId = orderModel.getUserId();
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+        if (orderEntity == null) {
+            return false;
+        }
+        orderEntity.setDeleted(true);
+        orderRepository.updateOrder(orderEntity);
+        return true;
+    }
+
     private void updateOrderEntityAgainstRequestData(OrderEntity orderEntity, OrderModel orderData) {
         orderEntity.setBooks(orderData.getBooks().isEmpty() ? orderEntity.getBooks() : orderData.getBooks());
     }
