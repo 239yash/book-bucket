@@ -22,17 +22,6 @@ public class BookOrderService {
         return true;
     }
 
-    private OrderEntity getOrderEntity(OrderModel orderData) {
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setOrderStatus(Constants.OrderStatus.NEW);
-        orderEntity.setOrderType(Constants.OrderType.BUY);
-        orderEntity.setUserId(orderData.getUserId());
-        orderEntity.setBooks(orderData.getBooks());
-        orderEntity.setSubmitted(false);
-        orderEntity.setDeleted(false);
-        return orderEntity;
-    }
-
     public boolean editOrder(OrderModel orderData) {
         String userId = orderData.getUserId();
         OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
@@ -44,8 +33,7 @@ public class BookOrderService {
         return true;
     }
 
-    public boolean deleteOrder(OrderModel orderModel) {
-        String userId = orderModel.getUserId();
+    public boolean deleteOrder(String userId) {
         OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
         if (orderEntity == null) {
             return false;
@@ -53,6 +41,17 @@ public class BookOrderService {
         orderEntity.setDeleted(true);
         orderRepository.updateOrder(orderEntity);
         return true;
+    }
+
+    private OrderEntity getOrderEntity(OrderModel orderData) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderStatus(Constants.OrderStatus.NEW);
+        orderEntity.setOrderType(Constants.OrderType.BUY);
+        orderEntity.setUserId(orderData.getUserId());
+        orderEntity.setBooks(orderData.getBooks());
+        orderEntity.setSubmitted(false);
+        orderEntity.setDeleted(false);
+        return orderEntity;
     }
 
     private void updateOrderEntityAgainstRequestData(OrderEntity orderEntity, OrderModel orderData) {
