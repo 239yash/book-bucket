@@ -57,4 +57,12 @@ public class BookOrderService {
     private void updateOrderEntityAgainstRequestData(OrderEntity orderEntity, OrderModel orderData) {
         orderEntity.setBooks(orderData.getBooks().isEmpty() ? orderEntity.getBooks() : orderData.getBooks());
     }
+
+    public Object submitOrder(String userId) {
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+        if (orderEntity == null) {
+            return "Draft not found";
+        }
+
+    }
 }
