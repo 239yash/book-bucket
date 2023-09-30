@@ -32,9 +32,19 @@ public class BookOrderController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteOrderDraft(@RequestBody OrderModel orderModel) {
-        if (orderModel.getUserId() == null) {
+        String userId = orderModel.getUserId();
+        if (userId == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderService.deleteOrder(orderModel));
+        return ResponseEntity.ok(bookOrderService.deleteOrder(userId));
+    }
+
+    @PostMapping("/submit")
+    public ResponseEntity<?> submitOrder(@RequestBody OrderModel orderModel) {
+        String userId = orderModel.getUserId();
+        if (userId == null) {
+            return ResponseEntity.badRequest().body("Please pass valid userId");
+        }
+        return ResponseEntity.ok(bookOrderService.submitOrder(userId));
     }
 }
