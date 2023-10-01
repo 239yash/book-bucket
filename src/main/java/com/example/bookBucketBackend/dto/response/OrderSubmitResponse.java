@@ -18,7 +18,7 @@ public class OrderSubmitResponse {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public class BookOrderResult {
+    public static class BookOrderResult {
         private String bookId;
         private String bookName;
         private boolean success;

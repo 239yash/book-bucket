@@ -16,6 +16,7 @@ public class OrderEntity {
     @Id
     private String id;
     private String userId;
+    private String orderId;
     private boolean isSubmitted;
     private boolean isDeleted;
     private Constants.OrderType orderType;
