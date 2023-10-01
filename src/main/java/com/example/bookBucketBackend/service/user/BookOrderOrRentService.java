@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class BookOrderService {
+public class BookOrderOrRentService {
     private final OrderRepository orderRepository;
     private final BookRepository bookRepository;
 
