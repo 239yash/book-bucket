@@ -78,10 +78,16 @@ public class BookOrderService {
         if (orderEntity.getBooks().isEmpty()) {
             return "No books found in draft, Please add books";
         }
+
+        // orderEntity update for converting draft to order
         orderEntity.setOrderId(orderId);
         orderEntity.setSubmitted(true);
-        List<BookList.Book> books = orderEntity.getBooks();
+
+        // Preparing response structure for single book entity
         List<OrderSubmitResponse.BookOrderResult> bookOrderResults = new ArrayList<>();
+
+        // Processing books
+        List<BookList.Book> books = orderEntity.getBooks();
         for (BookList.Book book : books) {
             String bookId = book.getBookId();
             if (bookId == null) {
@@ -101,9 +107,13 @@ public class BookOrderService {
             }
             bookOrderResults.add(bookOrderResult);
         }
+
+        // Preparing final response structure
         OrderSubmitResponse orderSubmitResponse = new OrderSubmitResponse();
         orderSubmitResponse.setSuccess(true);
         orderSubmitResponse.setData(bookOrderResults);
+
+        // Marking the order draft as submitted
         orderRepository.updateOrder(orderEntity);
         return orderSubmitResponse;
     }
