@@ -27,4 +27,8 @@ public class BookRepository {
         Query query = new Query(criteria);
         return mongoTemplate.findOne(query, BookEntity.class);
     }
+
+    public void updateBook(BookEntity bookEntity) {
+        mongoTemplate.save(bookEntity);
+    }
 }
