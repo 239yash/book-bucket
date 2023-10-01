@@ -9,6 +9,7 @@ import com.example.bookBucketBackend.entity.OrderEntity;
 import com.example.bookBucketBackend.repository.BookRepository;
 import com.example.bookBucketBackend.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class BookOrderService {
     private final OrderRepository orderRepository;
     private final BookRepository bookRepository;
-    private String azAZ09 = "[^a-zA-Z0-9]";
 
     public boolean createOrder(OrderModel orderData) {
         String userId = orderData.getUserId();
@@ -70,7 +71,7 @@ public class BookOrderService {
 
     public Object submitOrder(String userId) {
         OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
-        String orderId = UUID.randomUUID().toString().replaceAll(azAZ09, "").substring(6);
+        String orderId = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(19);
         if (orderEntity == null) {
             return "Draft not found";
         }
