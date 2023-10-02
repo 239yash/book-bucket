@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api/orders/buy")
 @Slf4j
 public class BookOrderController {
     private final BookOrderOrRentService bookOrderOrRentService;

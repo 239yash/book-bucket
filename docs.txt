@@ -17,3 +17,9 @@ APIs
 6. Orders listing (Admin only)
 7. API for changing state of the order (Admin only)
 8. API for editing order (Admin only)
+
+Book SELL orders ->
+1. User will create drafts (CRUD)
+2. User will submit the draft -> order in NEW state.
+3. Once, Admin approves and changes the order state.
+4. When order is marked COMPLETED, Then books are added in the inventory
