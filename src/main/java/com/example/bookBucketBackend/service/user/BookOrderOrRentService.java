@@ -33,6 +33,19 @@ public class BookOrderOrRentService {
         return true;
     }
 
+    public Object getOrder(String userId) {
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+        if (orderEntity == null) {
+            return false;
+        }
+        OrderModel orderModel = new OrderModel();
+        orderModel.setBooks(orderEntity.getBooks());
+        orderModel.setOrderType(orderEntity.getOrderType());
+        orderModel.setUserId(orderEntity.getUserId());
+        orderModel.setId(orderModel.getId());
+        return orderModel;
+    }
+
     public boolean editOrder(OrderModel orderData) {
         String userId = orderData.getUserId();
         OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);

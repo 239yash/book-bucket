@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/orders/buy")
 @Slf4j
-public class BookOrderController {
+public class BookBuyController {
     private final BookOrderOrRentService bookOrderOrRentService;
 
     @PostMapping
@@ -37,6 +37,14 @@ public class BookOrderController {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
         return ResponseEntity.ok(bookOrderOrRentService.deleteOrder(userId));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getOrderDraft(@RequestParam String userId) {
+        if (userId == null) {
+            return ResponseEntity.badRequest().body("Please pass valid userId");
+        }
+        return ResponseEntity.ok(bookOrderOrRentService.getOrder(userId));
     }
 
     @PostMapping("/submit")
