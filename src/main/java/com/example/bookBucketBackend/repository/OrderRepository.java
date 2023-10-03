@@ -1,5 +1,6 @@
 package com.example.bookBucketBackend.repository;
 
+import com.example.bookBucketBackend.Constants;
 import com.example.bookBucketBackend.entity.OrderEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,11 +13,12 @@ import org.springframework.stereotype.Service;
 public class OrderRepository {
     private final MongoTemplate mongoTemplate;
 
-    public OrderEntity getLiveOrderByUser(String userId) {
+    public OrderEntity getLiveOrderByUser(String userId, Constants.OrderType orderType) {
         Criteria criteria = Criteria
                 .where("userId").is(userId)
                 .and("isSubmitted").is(false)
-                .and("isDeleted").is(false);
+                .and("isDeleted").is(false)
+                .and("orderType").is(orderType);
         return mongoTemplate.findOne(new Query(criteria), OrderEntity.class);
     }
 

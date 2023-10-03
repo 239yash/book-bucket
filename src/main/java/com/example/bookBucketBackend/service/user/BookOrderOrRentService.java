@@ -23,9 +23,9 @@ public class BookOrderOrRentService {
     private final OrderRepository orderRepository;
     private final BookRepository bookRepository;
 
-    public boolean createOrder(OrderModel orderData) {
+    public boolean createOrder(OrderModel orderData, Constants.OrderType orderType) {
         String userId = orderData.getUserId();
-        if (orderRepository.getLiveOrderByUser(userId) != null) {
+        if (orderRepository.getLiveOrderByUser(userId, orderType) != null) {
             return false;
         }
         OrderEntity orderEntity = getNewBuyOrderEntity(orderData);
@@ -33,8 +33,8 @@ public class BookOrderOrRentService {
         return true;
     }
 
-    public Object getOrder(String userId) {
-        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+    public Object getOrder(String userId, Constants.OrderType orderType) {
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId, orderType);
         if (orderEntity == null) {
             return false;
         }
@@ -42,13 +42,12 @@ public class BookOrderOrRentService {
         orderModel.setBooks(orderEntity.getBooks());
         orderModel.setOrderType(orderEntity.getOrderType());
         orderModel.setUserId(orderEntity.getUserId());
-        orderModel.setId(orderModel.getId());
         return orderModel;
     }
 
-    public boolean editOrder(OrderModel orderData) {
+    public boolean editOrder(OrderModel orderData, Constants.OrderType orderType) {
         String userId = orderData.getUserId();
-        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId, orderType);
         if (orderEntity == null) {
             return false;
         }
@@ -57,8 +56,8 @@ public class BookOrderOrRentService {
         return true;
     }
 
-    public boolean deleteOrder(String userId) {
-        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+    public boolean deleteOrder(String userId, Constants.OrderType orderType) {
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId, orderType);
         if (orderEntity == null) {
             return false;
         }
@@ -82,8 +81,8 @@ public class BookOrderOrRentService {
         orderEntity.setBooks(orderData.getBooks().isEmpty() ? orderEntity.getBooks() : orderData.getBooks());
     }
 
-    public Object submitOrder(String userId) {
-        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId);
+    public Object submitOrder(String userId, Constants.OrderType orderType) {
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId, orderType);
         String orderId = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(19);
         if (orderEntity == null) {
             return "Draft not found";
