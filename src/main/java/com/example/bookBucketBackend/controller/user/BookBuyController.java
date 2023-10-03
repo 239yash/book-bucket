@@ -1,5 +1,6 @@
 package com.example.bookBucketBackend.controller.user;
 
+import com.example.bookBucketBackend.Constants;
 import com.example.bookBucketBackend.dto.model.OrderModel;
 import com.example.bookBucketBackend.service.user.BookOrderOrRentService;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class BookBuyController {
         if (orderModel.getUserId() == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderOrRentService.createOrder(orderModel));
+        return ResponseEntity.ok(bookOrderOrRentService.createOrder(orderModel, Constants.OrderType.BUY));
     }
 
     @PutMapping
@@ -27,7 +28,7 @@ public class BookBuyController {
         if (orderModel.getUserId() == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderOrRentService.editOrder(orderModel));
+        return ResponseEntity.ok(bookOrderOrRentService.editOrder(orderModel, Constants.OrderType.BUY));
     }
 
     @DeleteMapping
@@ -36,7 +37,7 @@ public class BookBuyController {
         if (userId == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderOrRentService.deleteOrder(userId));
+        return ResponseEntity.ok(bookOrderOrRentService.deleteOrder(userId, Constants.OrderType.BUY));
     }
 
     @GetMapping
@@ -44,7 +45,7 @@ public class BookBuyController {
         if (userId == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderOrRentService.getOrder(userId));
+        return ResponseEntity.ok(bookOrderOrRentService.getOrder(userId, Constants.OrderType.BUY));
     }
 
     @PostMapping("/submit")
@@ -53,6 +54,6 @@ public class BookBuyController {
         if (userId == null) {
             return ResponseEntity.badRequest().body("Please pass valid userId");
         }
-        return ResponseEntity.ok(bookOrderOrRentService.submitOrder(userId));
+        return ResponseEntity.ok(bookOrderOrRentService.submitOrder(userId, Constants.OrderType.BUY));
     }
 }
