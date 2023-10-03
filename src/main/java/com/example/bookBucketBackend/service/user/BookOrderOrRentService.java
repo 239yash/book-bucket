@@ -28,7 +28,7 @@ public class BookOrderOrRentService {
         if (orderRepository.getLiveOrderByUser(userId, orderType) != null) {
             return false;
         }
-        OrderEntity orderEntity = getNewBuyOrderEntity(orderData);
+        OrderEntity orderEntity = getNewBuyOrderEntity(orderData, orderType);
         orderRepository.addOrder(orderEntity);
         return true;
     }
@@ -66,10 +66,9 @@ public class BookOrderOrRentService {
         return true;
     }
 
-    private OrderEntity getNewBuyOrderEntity(OrderModel orderData) {
+    private OrderEntity getNewBuyOrderEntity(OrderModel orderData, Constants.OrderType orderType) {
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setOrderStatus(Constants.OrderStatus.NEW);
-        orderEntity.setOrderType(Constants.OrderType.BUY);
+        orderEntity.setOrderType(orderType);
         orderEntity.setUserId(orderData.getUserId());
         orderEntity.setBooks(orderData.getBooks());
         orderEntity.setSubmitted(false);
@@ -94,6 +93,7 @@ public class BookOrderOrRentService {
         // orderEntity update for converting draft to order
         orderEntity.setOrderId(orderId);
         orderEntity.setSubmitted(true);
+        orderEntity.setOrderStatus(Constants.OrderStatus.NEW);
 
         // Preparing response structure for single book entity
         List<OrderSubmitResponse.BookOrderResult> bookOrderResults = new ArrayList<>();
