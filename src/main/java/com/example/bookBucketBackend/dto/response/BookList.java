@@ -26,4 +26,15 @@ public class BookList {
         private int year;
         private int countsAvailable;
     }
+
+    @Builder
+    @Getter
+    @Setter
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class BookOrder {
+        private String bookId;
+        private int count;
+    }
 }

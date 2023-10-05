@@ -20,6 +20,6 @@ public class OrderEntity {
     private boolean isSubmitted;
     private boolean isDeleted;
     private Constants.OrderType orderType;
-    private List<BookList.Book> books;
+    private List<BookList.BookOrder> books;
     private Constants.OrderStatus orderStatus;
 }
