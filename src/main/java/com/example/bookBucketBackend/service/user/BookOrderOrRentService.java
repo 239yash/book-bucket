@@ -99,8 +99,8 @@ public class BookOrderOrRentService {
         List<OrderSubmitResponse.BookOrderResult> bookOrderResults = new ArrayList<>();
 
         // Processing books
-        List<BookList.Book> books = orderEntity.getBooks();
-        for (BookList.Book book : books) {
+        List<BookList.BookOrder> books = orderEntity.getBooks();
+        for (BookList.BookOrder book : books) {
             String bookId = book.getBookId();
             if (bookId == null) {
                 continue;
@@ -129,4 +129,29 @@ public class BookOrderOrRentService {
         orderRepository.updateOrder(orderEntity);
         return orderSubmitResponse;
     }
+
+    public Object submitSellOrder(String userId, Constants.OrderType orderType) {
+        OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId, orderType);
+        String orderId = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(19);
+        if (orderEntity == null) {
+            return "Draft not found";
+        }
+        if (orderEntity.getBooks().isEmpty()) {
+            return "No books found in draft, Please add books";
+        }
+
+        // orderEntity update for converting draft to order
+        orderEntity.setOrderId(orderId);
+        orderEntity.setSubmitted(true);
+        orderEntity.setOrderStatus(Constants.OrderStatus.NEW);
+
+        // Preparing final response structure
+        OrderSubmitResponse orderSubmitResponse = new OrderSubmitResponse();
+        orderSubmitResponse.setSuccess(true);
+
+        // Marking the order draft as submitted
+        orderRepository.updateOrder(orderEntity);
+        return orderSubmitResponse;
+    }
+
 }
