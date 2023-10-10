@@ -16,8 +16,9 @@ public class BaseFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        log.info("Filter Hit");
+        log.info("Filter In");
         filterChain.doFilter(servletRequest, servletResponse);
+        log.info("Filter Out");
     }
 
     @Override

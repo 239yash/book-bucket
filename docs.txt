@@ -13,7 +13,7 @@ APIs
 2. Get single book - done
 3. Add book (Only by sell order flow or admin flow) - done
 4. CRUD for order draft (orderType - BUY) - done
-5. CRUD for order draft (orderType - SELL) -
+5. CRUD for order draft (orderType - SELL) - done
 6. Orders listing (Admin only)
 7. API for changing state of the order (Admin only)
 8. API for editing order (Admin only)
