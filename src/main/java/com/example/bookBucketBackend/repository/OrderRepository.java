@@ -32,11 +32,14 @@ public class OrderRepository {
         mongoTemplate.save(orderEntity);
     }
 
-    public List<OrderEntity> getAllOrders(Constants.OrderType orderType) {
+    public List<OrderEntity> getAllOrders(Constants.OrderType orderType, String userId) {
         Criteria criteria = Criteria
                 .where("isSubmitted").is(false)
                 .and("isDeleted").is(false)
                 .and("orderType").is(orderType);
+        if (userId != null) {
+            criteria.and("userId").is(userId);
+        }
         return mongoTemplate.find(new Query(criteria), OrderEntity.class);
     }
 }
