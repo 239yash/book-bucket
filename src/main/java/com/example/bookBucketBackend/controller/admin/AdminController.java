@@ -21,7 +21,7 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping
-    public List<OrderEntity> getAllOrders(@RequestParam Constants.OrderType orderType) {
-        return adminService.getAllOrders(orderType);
+    public List<OrderEntity> getAllOrders(@RequestParam Constants.OrderType orderType, @RequestParam(required = false) String userId) {
+        return adminService.getAllOrders(orderType, userId);
     }
 }
