@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class OrderRepository {
@@ -28,5 +30,13 @@ public class OrderRepository {
 
     public void updateOrder(OrderEntity orderEntity) {
         mongoTemplate.save(orderEntity);
+    }
+
+    public List<OrderEntity> getAllOrders(Constants.OrderType orderType) {
+        Criteria criteria = Criteria
+                .where("isSubmitted").is(false)
+                .and("isDeleted").is(false)
+                .and("orderType").is(orderType);
+        return mongoTemplate.find(new Query(criteria), OrderEntity.class);
     }
 }
