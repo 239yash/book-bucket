@@ -23,6 +23,7 @@ public class AdminController {
     @GetMapping
     public List<OrderEntity> getAllOrders(@RequestParam Constants.OrderType orderType,
                                           @RequestParam(required = false) String userId) {
+        log.info("In Admin Controller");
         return adminService.getAllOrders(orderType, userId);
     }
 }

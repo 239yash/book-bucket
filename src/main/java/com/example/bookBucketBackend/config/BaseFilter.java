@@ -19,6 +19,7 @@ public class BaseFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         log.info("Filter In");
+        MDC.clear();
         String traceId = UUID.randomUUID().toString();
         MDC.put("traceId", traceId);
         filterChain.doFilter(servletRequest, servletResponse);
