@@ -23,3 +23,9 @@ Book SELL orders ->
 2. User will submit the draft -> order in NEW state.
 3. Once, Admin approves and changes the order state.
 4. When order is marked COMPLETED, Then books are added in the inventory
+
+
+Authentication ->
+Pure Auth interfaces, If we have to switch the auth providers.
+Once auth is done, fetch details of that user and its user type.
+If the user type is allowed to do that particular task, Allow him else throw error and block that account.
