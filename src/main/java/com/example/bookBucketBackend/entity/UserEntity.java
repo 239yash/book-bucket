@@ -14,4 +14,6 @@ public class UserEntity {
     private String userId;
     private String userName;
     private Constants.UserType userType;
+    private String createdDate;
+    private String password;
 }
