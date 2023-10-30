@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface UserInfoRepository {
     Optional<UserInfo> findByName(String username);
+
+    void save(UserInfo userInfo);
 }

@@ -20,4 +20,9 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
                 .where("name").is(userName);
         return Optional.ofNullable(mongoTemplate.findOne(new Query(criteria), UserInfo.class));
     }
+
+    @Override
+    public void save(UserInfo userInfo) {
+        mongoTemplate.save(userInfo);
+    }
 }
