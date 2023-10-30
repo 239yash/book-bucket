@@ -1,7 +1,7 @@
 package com.example.bookBucketBackend.config;
 
 import com.example.bookBucketBackend.service.user.UserInfoService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +21,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@AllArgsConstructor
 public class WebSecurityConfig {
-    private final JwtAuthFilter authFilter;
-
+    @Autowired
+    private JwtAuthFilter authFilter;
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserInfoService();
