@@ -13,8 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class UserInfo {
     @Id
     private String userId;
-    private String userName;
     private String roles;
-    private String email;
+    private String emailAddress;
     private String password;
 }

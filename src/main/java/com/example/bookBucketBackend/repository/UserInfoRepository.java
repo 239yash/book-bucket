@@ -5,7 +5,7 @@ import com.example.bookBucketBackend.entity.UserInfo;
 import java.util.Optional;
 
 public interface UserInfoRepository {
-    Optional<UserInfo> findByName(String username);
+    Optional<UserInfo> findByEmail(String email);
 
     void save(UserInfo userInfo);
 }
