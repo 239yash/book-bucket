@@ -6,12 +6,14 @@ import com.example.bookBucketBackend.service.user.BookOrderOrRentService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/orders/sell")
+@RequestMapping("/api/auth/sell")
 @Slf4j
+@PreAuthorize("hasAuthority('ROLE_USER')")
 public class BookRentController {
     private final BookOrderOrRentService bookOrderOrRentService;
 
