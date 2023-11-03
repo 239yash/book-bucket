@@ -19,20 +19,20 @@ public class UserInfoService implements UserDetailsService {
     private PasswordEncoder encoder;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<UserInfo> userDetail = repository.findByName(userName);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<UserInfo> userDetail = repository.findByEmail(email);
         return userDetail.map(UserInfoDetails::new)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found " + userName));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
     }
 
     public String addUser(UserInfo userInfo) {
-        if (userInfo.getUserName() == null) {
-            return "Kindly provide userName!";
+        if (userInfo.getEmailAddress() == null) {
+            return "Kindly provide email address!";
         }
-        String userName = userInfo.getUserName();
-        Optional<UserInfo> userDetail = repository.findByName(userName);
+        String userName = userInfo.getEmailAddress();
+        Optional<UserInfo> userDetail = repository.findByEmail(userName);
         if (userDetail.isPresent()) {
-            return "userName already taken, Please choose a different userName!";
+            return "email already taken, Please choose a different email!";
         }
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
         repository.save(userInfo);

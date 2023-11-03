@@ -15,9 +15,9 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public Optional<UserInfo> findByName(String userName) {
+    public Optional<UserInfo> findByEmail(String email) {
         Criteria criteria = Criteria
-                .where("userName").is(userName);
+                .where("emailAddress").is(email);
         return Optional.ofNullable(mongoTemplate.findOne(new Query(criteria), UserInfo.class));
     }
 
