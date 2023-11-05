@@ -100,6 +100,7 @@ public class BookOrderOrRentService {
 
         // Processing books
         List<BookList.BookOrder> books = orderEntity.getBooks();
+        List<BookList.BookOrder> availableBooks = new ArrayList<>();
         for (BookList.BookOrder book : books) {
             String bookId = book.getBookId();
             if (bookId == null) {
@@ -116,6 +117,7 @@ public class BookOrderOrRentService {
                 bookEntity.setCountsAvailable(countsAvailable);
                 bookRepository.updateBook(bookEntity);
                 bookOrderResult.setSuccess(true);
+                availableBooks.add(book);
             }
             bookOrderResults.add(bookOrderResult);
         }
@@ -126,6 +128,7 @@ public class BookOrderOrRentService {
         orderSubmitResponse.setData(bookOrderResults);
 
         // Marking the order draft as submitted
+        orderEntity.setBooks(availableBooks);
         orderRepository.updateOrder(orderEntity);
         return orderSubmitResponse;
     }
