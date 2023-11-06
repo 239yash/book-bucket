@@ -80,7 +80,7 @@ public class BookOrderOrRentService {
         orderEntity.setBooks(orderData.getBooks().isEmpty() ? orderEntity.getBooks() : orderData.getBooks());
     }
 
-    public Object submitOrder(String userId, Constants.OrderType orderType) {
+    public synchronized Object submitOrder(String userId, Constants.OrderType orderType) {
         OrderEntity orderEntity = orderRepository.getLiveOrderByUser(userId, orderType);
         String orderId = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(19);
         if (orderEntity == null) {
