@@ -8,8 +8,4 @@ public class Constants {
     public enum OrderStatus {
         NEW, IN_PROCESS, COMPLETED, REJECTED, ON_HOLD
     }
-
-    public enum UserType {
-        USER, ADMIN
-    }
 }
