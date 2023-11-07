@@ -3,7 +3,6 @@ package com.example.bookBucketBackend.controller.admin;
 
 import com.example.bookBucketBackend.Constants;
 import com.example.bookBucketBackend.dto.response.BookList;
-import com.example.bookBucketBackend.entity.OrderEntity;
 import com.example.bookBucketBackend.service.admin.AdminService;
 import com.example.bookBucketBackend.service.books.BookService;
 import lombok.AllArgsConstructor;
@@ -12,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -26,10 +23,17 @@ public class AdminController {
     private final BookService bookService;
 
     @GetMapping("/orders")
-    public List<OrderEntity> getAllOrders(@RequestParam Constants.OrderType orderType,
-                                          @RequestParam(required = false) String userId) {
-        log.info("In Admin Controller");
-        return adminService.getAllOrders(orderType, userId);
+    public ResponseEntity<?> getAllOrders(@RequestParam(required = false) Constants.OrderType orderType,
+                                          @RequestParam(required = false) String userId,
+                                          @RequestParam(required = false) String orderId,
+                                          @RequestParam(required = false) Boolean includeExpired) {
+        if (userId == null && orderId == null) {
+            return ResponseEntity.badRequest().body("Order Id or User Id is required!");
+        }
+        if (includeExpired == null) {
+            includeExpired = false;
+        }
+        return ResponseEntity.ok(adminService.getAllOrders(orderType, userId, orderId, includeExpired));
     }
 
     @PostMapping("/add-book")
