@@ -16,7 +16,7 @@ import java.util.List;
 public class AdminService {
     private final OrderRepository orderRepository;
 
-    public List<OrderEntity> getAllOrders(Constants.OrderType orderType, String userId) {
-        return orderRepository.getAllOrders(orderType, userId);
+    public List<OrderEntity> getAllOrders(Constants.OrderType orderType, String userId, String orderId, Boolean includeExpired) {
+        return orderRepository.getAllOrders(orderType, userId, orderId, includeExpired);
     }
 }
