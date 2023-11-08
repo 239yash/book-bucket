@@ -2,6 +2,7 @@ package com.example.bookBucketBackend.controller.admin;
 
 
 import com.example.bookBucketBackend.Constants;
+import com.example.bookBucketBackend.dto.model.OrderModel;
 import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.service.admin.AdminService;
 import com.example.bookBucketBackend.service.books.BookService;
@@ -42,5 +43,13 @@ public class AdminController {
             return ResponseEntity.ok("Success");
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Fail");
+    }
+
+    @PutMapping("/change-status")
+    public ResponseEntity<?> changeOrderStatus(@RequestBody OrderModel order) {
+        if (order.getOrderId() == null) {
+            return ResponseEntity.badRequest().body("Order Id is required!");
+        }
+        return ResponseEntity.ok(adminService.changeOrderStatus(order));
     }
 }
