@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderModel {
-    private String id;
+    private String orderId;
     private String userId;
     private boolean isSubmitted;
     private boolean isDeleted;
