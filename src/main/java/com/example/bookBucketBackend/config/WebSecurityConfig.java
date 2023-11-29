@@ -30,11 +30,19 @@ public class WebSecurityConfig {
         return new UserInfoService();
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/welcome", "/api/books/**", "/api/addNewUser", "/api/generateToken", "/api-docs")
+                .requestMatchers("/api/welcome",
+                        "/api/books/**",
+                        "/api/addNewUser",
+                        "/api/generateToken",
+                        "/api-docs",
+                        "/swagger-ui/**",
+                        "/swagger-resources/*",
+                        "/v3/api-docs/**")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
