@@ -7,6 +7,8 @@ import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.service.admin.AdminService;
 import com.example.bookBucketBackend.service.books.BookService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,13 @@ public class AdminController {
 
     @GetMapping("/orders")
     @Operation(summary = "order listing", description = "Get all orders in a single API(Admin usage only)")
-    public ResponseEntity<?> getAllOrders(@RequestParam(required = false) Constants.OrderType orderType,
+    @Parameters({
+            @Parameter(name = "orderType", description = "order type - buy or sell", required = true),
+            @Parameter(name = "userId", description = "user id of the user for which orders are to be fetched"),
+            @Parameter(name = "orderId", description = "order id for fetching a specific order"),
+            @Parameter(name = "includeExpired", description = "boolean field for including expired orders too")
+    })
+    public ResponseEntity<?> getAllOrders(@RequestParam() Constants.OrderType orderType,
                                           @RequestParam(required = false) String userId,
                                           @RequestParam(required = false) String orderId,
                                           @RequestParam(required = false) Boolean includeExpired) {
