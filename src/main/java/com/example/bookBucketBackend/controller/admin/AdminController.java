@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth/admin")
 @Slf4j
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-
 public class AdminController {
     private final AdminService adminService;
     private final BookService bookService;
