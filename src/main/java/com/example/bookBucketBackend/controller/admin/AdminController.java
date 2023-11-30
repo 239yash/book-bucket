@@ -6,6 +6,7 @@ import com.example.bookBucketBackend.dto.model.OrderModel;
 import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.service.admin.AdminService;
 import com.example.bookBucketBackend.service.books.BookService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class AdminController {
     private final BookService bookService;
 
     @GetMapping("/orders")
+    @Operation(summary = "order listing", description = "Get all orders in a single API(Admin usage only)")
     public ResponseEntity<?> getAllOrders(@RequestParam(required = false) Constants.OrderType orderType,
                                           @RequestParam(required = false) String userId,
                                           @RequestParam(required = false) String orderId,
@@ -38,6 +40,7 @@ public class AdminController {
     }
 
     @PostMapping("/add-book")
+    @Operation(summary = "Add book", description = "Add a new book in the database(Admin usage only)")
     public ResponseEntity<?> addBook(@RequestBody BookList.Book book) {
         if (bookService.addBook(book)) {
             return ResponseEntity.ok("Success");
@@ -46,6 +49,7 @@ public class AdminController {
     }
 
     @PutMapping("/change-status")
+    @Operation(summary = "Order status change", description = "Api for changing order status(Admin usage only)")
     public ResponseEntity<?> changeOrderStatus(@RequestBody OrderModel order) {
         if (order.getOrderId() == null) {
             return ResponseEntity.badRequest().body("Order Id is required!");
