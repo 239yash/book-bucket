@@ -21,5 +21,9 @@ Additionally, an admin section allows for efficient order management and real-ti
 ### API Documentation -
 
 - API documentation is done via openApi and Swagger UI.
-- Link for Swagger UI - {base url}/swagger-ui/index.html 
+- Link for Swagger UI - {base url}/swagger-ui/index.html.
+
+### Tech Used -
+
+JAVA, SpringBoot, Swagger, OpenApi
 
