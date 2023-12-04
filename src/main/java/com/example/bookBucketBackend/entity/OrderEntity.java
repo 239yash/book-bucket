@@ -1,7 +1,7 @@
 package com.example.bookBucketBackend.entity;
 
-import com.example.bookBucketBackend.Constants;
 import com.example.bookBucketBackend.dto.response.BookList;
+import com.example.bookBucketBackend.util.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;

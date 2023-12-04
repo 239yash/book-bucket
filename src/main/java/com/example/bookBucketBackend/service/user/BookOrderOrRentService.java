@@ -1,6 +1,5 @@
 package com.example.bookBucketBackend.service.user;
 
-import com.example.bookBucketBackend.Constants;
 import com.example.bookBucketBackend.dto.model.OrderModel;
 import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.dto.response.OrderSubmitResponse;
@@ -8,6 +7,7 @@ import com.example.bookBucketBackend.entity.BookEntity;
 import com.example.bookBucketBackend.entity.OrderEntity;
 import com.example.bookBucketBackend.repository.BookRepository;
 import com.example.bookBucketBackend.repository.OrderRepository;
+import com.example.bookBucketBackend.util.Constants;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

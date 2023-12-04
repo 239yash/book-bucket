@@ -1,6 +1,6 @@
 package com.example.bookBucketBackend.controller;
 
-import com.example.bookBucketBackend.config.JwtService;
+import com.example.bookBucketBackend.authentication.JwtService;
 import com.example.bookBucketBackend.dto.model.AuthRequest;
 import com.example.bookBucketBackend.entity.UserInfo;
 import com.example.bookBucketBackend.service.user.UserInfoService;

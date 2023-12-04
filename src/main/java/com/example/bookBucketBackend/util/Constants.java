@@ -1,4 +1,4 @@
-package com.example.bookBucketBackend;
+package com.example.bookBucketBackend.util;
 
 public class Constants {
     public enum OrderType {

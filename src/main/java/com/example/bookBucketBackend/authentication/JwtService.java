@@ -1,4 +1,4 @@
-package com.example.bookBucketBackend.config;
+package com.example.bookBucketBackend.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package com.example.bookBucketBackend.config;
+package com.example.bookBucketBackend.authentication;
 
 import com.example.bookBucketBackend.service.user.UserInfoService;
 import jakarta.servlet.FilterChain;
