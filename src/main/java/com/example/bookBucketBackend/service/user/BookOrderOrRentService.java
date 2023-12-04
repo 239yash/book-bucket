@@ -5,7 +5,7 @@ import com.example.bookBucketBackend.dto.response.BookList;
 import com.example.bookBucketBackend.dto.response.OrderSubmitResponse;
 import com.example.bookBucketBackend.entity.BookEntity;
 import com.example.bookBucketBackend.entity.OrderEntity;
-import com.example.bookBucketBackend.repository.BookRepository;
+import com.example.bookBucketBackend.repository.BookRepositoryImpl;
 import com.example.bookBucketBackend.repository.OrderRepository;
 import com.example.bookBucketBackend.util.Constants;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @Slf4j
 public class BookOrderOrRentService {
     private final OrderRepository orderRepository;
-    private final BookRepository bookRepository;
+    private final BookRepositoryImpl bookRepository;
 
     public boolean createOrder(OrderModel orderData, Constants.OrderType orderType) {
         String userId = orderData.getUserId();
