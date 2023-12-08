@@ -5,11 +5,11 @@ import com.example.bookBucketBackend.entity.BookEntity;
 import java.util.List;
 
 public interface BookRepository {
-    public void addBook(BookEntity bookEntity);
+     void addBook(BookEntity bookEntity);
 
-    public List<BookEntity> getAllBooks();
+     List<BookEntity> getAllBooks();
 
-    public BookEntity getBook(String bookId);
+     BookEntity getBook(String bookId);
 
-    public void updateBook(BookEntity bookEntity);
+     void updateBook(BookEntity bookEntity);
 }
