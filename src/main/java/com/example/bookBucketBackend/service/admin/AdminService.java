@@ -3,7 +3,7 @@ package com.example.bookBucketBackend.service.admin;
 
 import com.example.bookBucketBackend.dto.model.OrderModel;
 import com.example.bookBucketBackend.entity.OrderEntity;
-import com.example.bookBucketBackend.repository.OrderRepo;
+import com.example.bookBucketBackend.repository.OrderRepository;
 import com.example.bookBucketBackend.util.Constants;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class AdminService {
-    private final OrderRepo orderRepository;
+    private final OrderRepository orderRepository;
 
     public List<OrderEntity> getAllOrders(Constants.OrderType orderType, String userId, String orderId, Boolean includeExpired) {
         return orderRepository.getAllOrders(orderType, userId, orderId, includeExpired);

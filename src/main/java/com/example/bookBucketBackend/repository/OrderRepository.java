@@ -2,50 +2,18 @@ package com.example.bookBucketBackend.repository;
 
 import com.example.bookBucketBackend.entity.OrderEntity;
 import com.example.bookBucketBackend.util.Constants;
-import lombok.AllArgsConstructor;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@AllArgsConstructor
-public class OrderRepository implements OrderRepo {
-    private final MongoTemplate mongoTemplate;
+public interface OrderRepository {
+    OrderEntity getLiveOrderByUser(String userId, Constants.OrderType orderType);
 
-    public OrderEntity getLiveOrderByUser(String userId, Constants.OrderType orderType) {
-        Criteria criteria = Criteria
-                .where("userId").is(userId)
-                .and("isSubmitted").is(false)
-                .and("isDeleted").is(false)
-                .and("orderType").is(orderType);
-        return mongoTemplate.findOne(new Query(criteria), OrderEntity.class);
-    }
+    void addOrder(OrderEntity orderEntity);
 
-    public void addOrder(OrderEntity orderEntity) {
-        mongoTemplate.save(orderEntity);
-    }
+    void updateOrder(OrderEntity orderEntity);
 
-    public void updateOrder(OrderEntity orderEntity) {
-        mongoTemplate.save(orderEntity);
-    }
-
-    public List<OrderEntity> getAllOrders(Constants.OrderType orderType,
-                                          String userId,
-                                          String orderId,
-                                          Boolean includeExpired) {
-        Criteria criteria = Criteria.where("orderType").is(orderType);
-        if (!includeExpired) {
-            criteria.and("isSubmitted").is(false)
-                    .and("isDeleted").is(false);
-        }
-        if (userId != null) {
-            criteria.and("userId").is(userId);
-        } else {
-            criteria.and("orderId").is(orderId);
-        }
-        return mongoTemplate.find(new Query(criteria), OrderEntity.class);
-    }
+    List<OrderEntity> getAllOrders(Constants.OrderType orderType,
+                                   String userId,
+                                   String orderId,
+                                   Boolean includeExpired);
 }
