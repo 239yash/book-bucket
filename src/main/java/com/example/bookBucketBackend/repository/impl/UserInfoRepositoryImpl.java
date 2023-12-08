@@ -1,6 +1,7 @@
-package com.example.bookBucketBackend.repository;
+package com.example.bookBucketBackend.repository.impl;
 
 import com.example.bookBucketBackend.entity.UserInfo;
+import com.example.bookBucketBackend.repository.UserInfoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
