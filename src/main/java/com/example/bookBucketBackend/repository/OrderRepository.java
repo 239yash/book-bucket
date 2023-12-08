@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OrderRepository {
+public class OrderRepository implements OrderRepo {
     private final MongoTemplate mongoTemplate;
 
     public OrderEntity getLiveOrderByUser(String userId, Constants.OrderType orderType) {
